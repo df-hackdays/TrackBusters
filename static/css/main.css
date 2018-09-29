@@ -1,0 +1,142 @@
+html{
+  font-family: 'Open Sans', sans-serif;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+h1{
+  font-size: 15vh;
+  font-weight: 700;
+}
+
+h2{
+  font-size: 8vh;
+  font-weight: 700;
+}
+
+p{
+  font-size: 24px;
+}
+
+label{
+  font-weight: 700;
+}
+
+span{
+  vertical-align: bottom;
+}
+
+a{
+  color: #22A39F;
+}
+
+#mainContentWrapper, #frontContentWrapper{
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+#frontContentWrapper{
+  background: linear-gradient(to left, rgba(138, 249, 243, 1), rgba(250, 252, 251, 0.1));
+}
+
+#mainContentWrapper{
+  background-color: #FAFCFB;
+}
+
+#mainContent{
+  height: 100%;
+  width: calc(100% - 150px);
+}
+
+#actionBar{
+  height: 100vh;
+  width: 150px;
+  background-color: rgb(138, 249, 243);
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  box-shadow: 3px 3px 5px #fff;
+}
+
+#logo{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+#frontBackground{
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  height: calc(80vh - 100px);
+  width: auto;
+}
+
+#frontContent{
+  height: 100%;
+}
+
+#mc{
+  min-height: 100vh;
+}
+
+#slogan{
+  max-width: 450px;
+  margin-left: 150px;
+}
+
+#signupWrapper{
+  margin-left: 50px;
+  width: calc(100% - 50px);
+}
+
+#signupForm{
+  width: 400px;
+  margin: auto;
+  padding: 20px;
+}
+
+.signup-progress{
+  position: relative;
+  height: 30px;
+  width: 100%;
+  margin: 15px 0;
+}
+.prog-ball{
+  position: absolute;
+  top: 5px;
+  background-color: #22A39F;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+}
+.prog-ball-1{left: 0} .prog-ball-2{left: calc(50% - 10px)} .prog-ball-3{right: 0}
+.prog-ball-active{
+  background-color: #EF0A1A;
+}
+.prog-line{
+  position: absolute;
+  top: 50%;
+  height: 1px;
+  width: 50%;
+  border-bottom: 1px solid #EF0A1A;
+  z-index: -1;
+}
+.prog-line-1{left: 0} .prog-line-2{left: 50%}
+
+.vertical-centered-wrapper {
+  position: relative;
+}
+.vertical-centered {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.btn-primary{
+  background-color: #EF0A1A;
+}

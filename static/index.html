@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Canada Learning Code</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TimelineLite.min.js"></script>
+    <script src="/js/main.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body>
+    <div id="frontContentWrapper">
+      <div id="logo"><img src="/img/clc-logo-1.svg"></div>
+      <!-- <div id="frontBackground"><img src="/img/front-background.jpg"></div> -->
+      <div id="frontContent" class="container-fluid">
+        <div class="row" id="mc">
+          <div class="col col-lg-6 vertical-centered-wrapper">
+            <div class="vertical-centered" id="slogan">
+              <h1>Learning,</h1>
+              <h2>now managed by us.</h2>
+              <p>Explore how using the CLC Learner Managing Tool helps with your learning. <a href="#">More...</a></p>
+            </div>
+          </div>
+          <div class="col col-lg-6 vertical-centered-wrapper">
+            <div class="vertical-centered" id="signupWrapper">
+              <form class="form" id="signupForm">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control"name="email" id="email">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" name="password" id="password">
+                </div>
+                <div class="form-group">
+                  <label for="repassword">Re-enter Password</label>
+                  <input type="password" class="form-control" name="repw" id="repw">
+                </div>
+                <div class="form-group">
+                  <span style="line-height: 40px">Already Registered? <a href="#">Login</a></span>
+                  <button type="button" id="signup" class="btn btn-primary float-right">Sign Up!</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
