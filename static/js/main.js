@@ -111,7 +111,12 @@ var toggleSignup = function(){
 };
 
 var attachGoToEvent = function(){
-  $(".card").click(function(){
+  $(".card").click(function(e){
+    var siblings = $(this).parent().siblings();
+    TweenMax.to(siblings, 1, {opacity: "0"});
+    TweenMax.to($(this), 2, {transform: "scale(2)", opacity: "0.5"});
+    setTimeout(()=>{
       location.replace("https://www.canadalearningcode.ca/experiences/toronto-chapter-ladies-learning-code-javascript-for-beginners-an-introduction-to-the-fundamentals-of-web-programming/");
+    ;}, 1000);
   });
 };
