@@ -7,11 +7,12 @@ const uri = "mongodb+srv://clc:clcuser2018@db-4yfv6.mongodb.net/clc?retryWrites=
 // seperate password from this table
 const userSchema = new mongoose.Schema({ username: 'string', password: 'string', email: 'string', fullname: 'string', gender: 'string', dateofbirth: 'date', zip: 'string', race: 'string', avatar: 'string', status: 'string' , signuptime: 'date', school: 'string', grade: 'string', hopetostart: 'string', interest: 'string', desc: 'string', complete: 'boolean'});
 const user = mongoose.model('user', userSchema);
-const eventSchema = new mongoose.Schema({name: 'string', contents: [{title: 'string', content: 'string'}], type: 'string', startDate: 'date', endDate: 'date', location: 'string', status: 'string', registered: [{id:'string'}], participated: [{id:'string'}]});
+const eventSchema = new mongoose.Schema({name: 'string', contents: [{title: 'string', content: 'string'}], type: 'string', cost: 'number' ,startDate: 'date', endDate: 'date', location: 'string', status: 'string', registered: [{id:'string'}], participated: [{id:'string'}]});
 const event = mongoose.model('event', eventSchema);
 
 mongoose.connect(uri);
 
+// hash the password!
 var signup = function (newUser, req, res){
   newUser.save(function(err){
     if(err) {
@@ -168,6 +169,38 @@ app.get("/admin", (req, res)=>{
   });
 })
 
+// sample analysis
+app.get('/event/1337', (req, res)=>{
+  event.findById("5bafa052d6d55e3cca8eb896", function(err, doc){
+    var registeredIds = doc.registered;
+    var participatedIds = doc.participated;
+    var regCount = registeredIds.length;
+    var parCount = participatedIds.length;
+    var ids = [];
+    for(var a = 0; a < registeredIds.length;a++){
+      ids.push(registeredIds[a].id);
+    }
+    user.find({_id:{$in: ids}}, (err, users)=>{
+      var regRace = {m: 0, nm: 0, un:0};
+      var ages = [];
+      for(var i = 0; i < users.length;i++){
+        if(users[i].race==null||users[i].race==""){
+          regRace.m++;
+        }else if (users[i].race=="Caucasian") {
+          regRace.nm++;
+        }else{
+          regRace.un++;
+        }
+        ages.push((new Date()).getFullYear()-users[i].dateofbirth.getFullYear());
+      }
+      var regAge = countAgeOccurance(ages);
+      res.render('eventAnalysis', {
+        event: doc, race: regRace, age: regAge, reg: regCount, par: parCount
+      });
+    });
+  });
+});
+
 app.listen(port, (error)=>{
   if(error){
     console.log(error);
@@ -183,4 +216,8 @@ var recommendEvent = function(cu){
     events = docs;
   });
   return events;
-}
+};
+
+var countAgeOccurance = function (arr) {
+  return arr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {})
+};

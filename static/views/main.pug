@@ -7,6 +7,7 @@
     -return ' '+d+' '+m+' '+y;
 -}
 div(id='mainContentWrapper')
+  <div id="logoRight"><img src="/img/clc-logo-1.svg"></div>
   div(id='actionBar', class='actionBar')
     div(id='actionBarIdentifier')
       span(class='avatar')
@@ -46,10 +47,13 @@ div(id='mainContentWrapper')
           div(class='col col-lg-10 offset-lg-1')
             .row
               span Complete your <a href="#">profile</a> to get recommendation list tailored to suit your needs. 
+      <br/><br/><br/>
       div(class='row')
         div(class='col col-lg-10 offset-lg-1')
           .row
-            span Exploe the events:
+            .col
+              span Explore the events:
+              button(class='btn btn-primary float-right') <i class="fas fa-filter"></i>
       div(class='row')
         div(class='col col-lg-10 offset-lg-1')
           div(class='row')

@@ -1,0 +1,174 @@
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Canada Learning Code</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TimelineLite.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+  <script src="/js/main.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+-function prettyDate(dateString){
+    //if it's already a date object and not a string you don't need this line:
+    -var date = new Date(dateString);
+    -var d = date.getDate();
+    -var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+    -var m = monthNames[date.getMonth()];
+    -var y = date.getFullYear();
+    -return ' '+d+' '+m+' '+y;
+-}
+div(id='mainContentWrapper')
+  <div id="logoRight"><img src="/img/clc-logo-1.svg"></div>
+  div(id='actionBar', class='actionBar')
+    div(id='actionBarIdentifier')
+      span(id='username' style="margin-left: 20px;") Admin User
+    div(class='user-action-wrapper')
+      span(class='user-action' id='profileAction') <i class="fas fa-user"></i> USERS
+    div(class='user-action-wrapper user-action-active')
+      span(class='user-action' id='eventAction') <i class="far fa-calendar-alt"></i> EVENTS
+    div(class='user-action-wrapper')
+      span(class='user-action' id='materialAction') <i class="fas fa-book"></i> MATERIAL
+    div(class='user-action-wrapper')
+      span(class='user-action' id='networkAction') <i class="fab fa-hubspot"></i> CHANGE LOGS
+  div(id='mainContent')
+    div(class='container-fluid')
+      div(class='row top-spacer')
+      div(class='row')
+        div(class='col col-lg-10 offset-lg-1')
+          h4 Events
+      div(class='row')
+        div(class='col col-lg-10 offset-lg-1')
+          div(class='section-label' data-toggle="collapse" data-target="#basicInfo" aria-expanded="true" aria-controls="basicInfo")
+            span(class='section-label-text') Basic Info
+      div(class='row section' id="basicInfo" class="collapse show")
+        div(class='col col-lg-10 offset-lg-1')
+          div(class='row inner-section')
+            div(class='col col-lg-4')
+              div(class="label") Event Name
+              div(class="value")=event.name
+            div(class='col col-lg-4')
+              div(class="label") Event Type
+              div(class="value")=event.type
+            div(class='col col-lg-4')
+              div(class="label") Event Status
+              div(class="value")=event.status
+            div(class='col col-lg-4')
+              div(class="label") Event Location
+              div(class="value")=event.location
+            div(class='col col-lg-4')
+              div(class="label") Event Start Date
+              div(class="value")=prettyDate(event.startDate)
+            div(class='col col-lg-4')
+              div(class="label") Event End Date
+              div(class="value")=prettyDate(event.endDate)
+            div(class='col col-lg-4')
+              div(class="label") Event Cost
+              div(class="value")=event.cost||0
+      div(class='row')
+        div(class='col col-lg-10 offset-lg-1')
+          div(class='section-label' data-toggle="collapse" data-target="#attendance" aria-expanded="true" aria-controls="attendance")
+            span(class='section-label-text') Attendance
+      div(class='row section' id="attendance" class="collapse")
+        div(class='col col-lg-10 offset-lg-1')
+          div(class='row inner-section')
+            if event.status == 'active'
+              div(class='col col-lg-4')
+                span Event did not begin yet.
+            if event.status != 'active'
+              div(class='col col-lg-4')
+                div(class='row')
+                  div(class='col col-lg-4')
+                    div(class="label") Registered
+                    div(class="value")=reg
+                  div(class='col col-lg-4')
+                    div(class="label") Attended
+                    div(class="value")=par
+      div(class='row')
+        div(class='col col-lg-10 offset-lg-1')
+          div(class='section-label' data-toggle="collapse" data-target="#demographic" aria-expanded="true" aria-controls="demographic")
+            span(class='section-label-text') Demographic
+      div(class='row section' id="demographic" class="collapse") 
+        div(class='col col-lg-10 offset-lg-1')
+          div(class='row inner-section')
+            div(class='col col-lg-6')
+              canvas(class='chart' id='minorityChart')
+            div(class='col col-lg-6')
+              canvas(class='chart' id='ageChart')
+script.
+  $(document).ready(function(){
+    var race = !{JSON.stringify(race)};
+    var age = !{JSON.stringify(age)};
+    var minorityChartCtx = document.getElementById("minorityChart").getContext('2d');
+    var minorityChartChart = new Chart(minorityChartCtx, {
+      type: 'doughnut',
+      data: {
+          labels: ["Minority", "Non-Minority", "Uncertain"],
+          datasets: [{
+              label: 'Number of participants',
+              data: [race.m, race.nm, race.un],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255,99,132,1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+        title: {
+            display: true,
+            text: 'Ethinity Info',
+            position: 'bottom'
+        }
+      }
+    });
+    var ageCtx = document.getElementById("ageChart").getContext('2d');
+    var ageChartChart = new Chart(ageCtx, {
+        type: 'bar',
+        data: {
+            labels: Object.keys(age),
+            datasets: [{
+                label: "Number of participants",
+                data: Object.values(age),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+          title: {
+            display: true,
+                text: 'Age Distribution',
+                position: 'bottom'
+            }
+        }
+    });
+      });
+</body>
+</html>
