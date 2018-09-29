@@ -17,6 +17,15 @@ $(document).ready(function(){
 var clicksignup = function(){
   $("#signup").click(function(e){
     e.preventDefault();
+    $(".error-message").html();
+    if($("#password").val().length<8){
+      $("#signupForm .error-message").html("Enter a stronger password.");
+      return false;
+    }
+    if($("#password").val()!=$("#repw").val()){
+      $("#signupForm .error-message").html("The password fields did not match.");
+      return false;
+    }
     $.post("/signup", $("#signupForm").serialize(), function(data){
       var tween2 = TweenMax.to($("#signupWrapper"), 0.5, {opacity: "0", right: "300px"});
       var tween1 = TweenMax.to($("#slogan"), 0.5, {opacity: "0"});

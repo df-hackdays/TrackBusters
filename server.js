@@ -57,7 +57,7 @@ var login = function(email, password, req, res){
 }
 
 const pug = require('pug');
-
+const bcrypt = require('bcrypt');
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -76,8 +76,16 @@ app.get("/", (req, res)=>{
 })
 
 app.post("/signup", (req, res)=>{
-  var password = req.body.password;
+  var password;
+  bcrypt.hash(req.body.password, 10, function(err, hash) {
+    if(err){
+      console.log(err);
+    }else{
+      password = hash;
+    }
+  });
   var email = req.body.email;
+  var repw = req.body.repw;
   var signupDate = Date.now();
   var newUser = new user();
   newUser.email = email;
@@ -138,16 +146,25 @@ app.get('/dashboard', (req, res)=>{
   });
 });
 
-//  todo: implement login
 app.post("/login", (req, res)=>{
   var email = req.body.email;
   var password = req.body.password;
   var sessData = req.session;
   user.findOne({email: email}, (err, currentUser)=>{
-    sessData.currentUser = currentUser;
-    res.write('/dashboard?id='+currentUser.id);
+    bcrypt.compare(password, currentUser.password, function(err, res) {
+      if(res) {
+        sessData.currentUser = currentUser;
+        event.find({status: 'active'}, null, {skip:0, limit:10}, function(err, docs){
+          res.render('main', {
+            currentUser: currentUser,
+            events: docs
+          });
+        });
+      } else {
+        render('login', {error: "Invalid Credentials."});
+      }
+    });
   });
-  // login(username, password, req, res);
 });
 
 app.get("/toggleLogin", (req, res)=>{
