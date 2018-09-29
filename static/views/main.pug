@@ -19,32 +19,33 @@ div(id='mainContentWrapper')
         div(class='col col-lg-10 offset-lg-1')
           h4 Events
       div(class='row')
-        div(class='col col-lg-10 offset-lg-1')
-          .row
-            span Based on your profile, you may be interested in the following events:
-          div(class='row')
-            if recommended.length > 0
+        if currentUser.complete && recommended!=null
+          div(class='col col-lg-10 offset-lg-1')
+            .row
+              span Based on your profile, you may be interested in the following events:
+            div(class='row')
               each event in recommended
                 div(class='col col-lg-4')
                   div(class='card')
                     div(class='card-body')
-                      h5(class='card-title')=event.location
+                      h5(class='card-title')=event.type
                       div(class='card-text')
-                        p(class='card-text-time')=event.startdate
-                        p=event.type
-                      button(class='btn btn-primary') Learn
+                        p(class='card-text-time') 2018/10/11
+                        p=event.location
+        if !currentUser.complete
+          div(class='col col-lg-10 offset-lg-1')
+            .row
+              span Finish this <a href="#">Survey</a> to get recommendation list tailored to suit your needs. 
       div(class='row')
         div(class='col col-lg-10 offset-lg-1')
           div(class='row')
-            if events.length > 0
               each event in events
                 div(class='col col-lg-4')
                   div(class='card')
                     div(class='card-body')
-                      h5(class='card-title')=event.location
+                      h5(class='card-title')=event.type
                       div(class='card-text')
-                        p(class='card-text-time')=event.startdate
-                        p=event.type
-                      button(class='btn btn-primary') Learn
+                        p(class='card-text-time') 2018/10/11
+                        p=event.location
       div(class='row')
       

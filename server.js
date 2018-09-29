@@ -21,13 +21,14 @@ var signup = function (newUser, req, res){
     }else{
       var sessData = req.session;
       var newUser = sessData.newUser;
-      var recommended = recommendEvent(currentUser);
       user.findOne({ email: newUser.email }, function (err, currentUser) {
         sessData.currentUser = currentUser;
-        res.render('main', {
-          currentUser: currentUser,
-          recommended: recommended,
-          events: event.find({status: 'active'}).skip(0).limit(10).sort({startDate: -1})
+        var events;
+        event.find({status: 'active'}, null, {skip:0, limit:10}, function(err, docs){
+          res.render('main', {
+            currentUser: currentUser,
+            events: docs
+          });
         });
       });
     }
@@ -124,14 +125,12 @@ app.post('/signup3', (req, res)=>{
 app.get('/dashboard', (req, res)=>{
   var id = req.params.id;
   user.findById(id, (err, currentUser)=>{
-    var recommended;
-    if(currentUser.complete===true){
-      recommended = recommendEvent(currentUser);
-    }
-    res.render('main', {
-      currentUser: currentUser,
-      recommended: recommended,
-      events: event.find({status: 'active'}).skip(0).limit(10).sort({startDate: -1})
+    var events;
+    event.find({status: 'active'}, null, {skip:0, limit:10}, function(err, docs){
+      res.render('main', {
+        currentUser: currentUser,
+        events: docs
+      });
     });
   });
 });
@@ -158,8 +157,12 @@ app.get("/toggleSignup", (req, res)=>{
 
 //  todo: implement admin user login, post
 app.get("/admin", (req, res)=>{
-  res.render('adminMain', {
-    events: event.find({status: 'active'}).skip(0).limit(10).sort({startDate: -1})
+  var events;
+  event.find({status: 'active'}, null, {skip:0, limit:10}, function(err, docs){
+    events = docs;
+    res.render('adminMain', {
+      events: docs
+    });
   });
 })
 
@@ -171,6 +174,11 @@ app.listen(port, (error)=>{
   }
 });
 
+// todo: impelement recommendation
 var recommendEvent = function(cu){
-  return null;
+  var events;
+  event.find({status: 'active'}, null, {skip:0, limit:1}, function(err, docs){
+    events = docs;
+  });
+  return events;
 }
