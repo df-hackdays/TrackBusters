@@ -11,4 +11,7 @@ Proposed Solution:
 
 Develop a reliable and extensible ‘learner management system’ that provides functionality for CLC to generate insights about their users and provides ability to administer, track and report the delivery and impact of their events. The system would enable learners to ‘stay connected’ with CLC and also allow them to tap into the experience, talent and connection of all their co-learners and CLC volunteers to grow and progress their career.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 119b856d3ba22fac44de71751b9f76b31643bb81
