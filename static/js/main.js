@@ -7,6 +7,14 @@ $(document).ready(function(){
   var tl1 = new TimelineLite();
   tl1.add(s1).add(s2).add(s3).add(s4).add(f1);
 
+  $("#slogan").click(function(){
+    tl1.seek(6.5, false);
+  })
+
+  clicksignup();
+});
+
+var clicksignup = function(){
   $("#signup").click(function(e){
     e.preventDefault();
     $.post("/signup", $("#signupForm").serialize(), function(data){
@@ -20,7 +28,22 @@ $(document).ready(function(){
       ;}, 1000);
     })
   });
-});
+};
+
+var clickLogin = function(){
+  $("#login").click(function(e){
+    e.preventDefault();
+    $.post("/login", $("#loginForm").serialize(), function(data){
+      var tween2 = TweenMax.to($("#signupWrapper"), 0.5, {opacity: "0", right: "300px"});
+      var tween1 = TweenMax.to($("#slogan"), 0.5, {opacity: "0"});
+      var tl = new TimelineLite();
+      tl.add(tween1).add(tween2);
+      setTimeout(()=>{
+        location.replace(data);
+      ;}, 1000);
+    })
+  });
+};
 
 var s2next = function(){
   $("#s2Next").click(function(e){
@@ -49,5 +72,25 @@ var s3next = function(){
         TweenMax.from($('#mainContent'), 1, {right: "600px"});
       ;}, 1000);
     });
+  });
+};
+
+var toggleLogin = function(){
+  $.get("/toggleLogin", function(data){
+    TweenMax.to($('#signupForm'), 1, {opacity: "0"});
+    setTimeout(()=>{
+      $("#signupWrapper").html(data);
+      clickLogin();
+    ;}, 1000);
+  });
+};
+
+var toggleSignup = function(){
+  $.get("/toggleSignup", function(data){
+    TweenMax.to($('#loginForm'), 1, {opacity: "0"});
+    setTimeout(()=>{
+      $("#signupWrapper").html(data);
+      clicksignup();
+    ;}, 1000);
   });
 };

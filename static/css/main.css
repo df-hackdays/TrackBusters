@@ -107,8 +107,7 @@ a{
   width: calc(100% - 50px);
 }
 
-#signupForm{
-  opacity: 0;
+#signupForm, #loginForm{
   width: 400px;
   margin: auto;
   padding: 20px;

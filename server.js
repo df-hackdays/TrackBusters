@@ -23,6 +23,7 @@ var signup = function (newUser, req, res){
       var newUser = sessData.newUser;
       var recommended = recommendEvent(currentUser);
       user.findOne({ email: newUser.email }, function (err, currentUser) {
+        sessData.currentUser = currentUser;
         res.render('main', {
           currentUser: currentUser,
           recommended: recommended,
@@ -135,11 +136,32 @@ app.get('/dashboard', (req, res)=>{
   });
 });
 
+//  todo: implement login
 app.post("/login", (req, res)=>{
-  var username = req.body.username;
-  var password = req.body.password
-  login(username, password, req, res);
+  var email = req.body.email;
+  var password = req.body.password;
+  var sessData = req.session;
+  user.findOne({email: email}, (err, currentUser)=>{
+    sessData.currentUser = currentUser;
+    res.write('/dashboard?id='+currentUser.id);
+  });
+  // login(username, password, req, res);
 });
+
+app.get("/toggleLogin", (req, res)=>{
+  res.render('login');
+});
+
+app.get("/toggleSignup", (req, res)=>{
+  res.render('signup');
+});
+
+//  todo: implement admin user login, post
+app.get("/admin", (req, res)=>{
+  res.render('adminMain', {
+    events: event.find({status: 'active'}).skip(0).limit(10).sort({startDate: -1})
+  });
+})
 
 app.listen(port, (error)=>{
   if(error){
