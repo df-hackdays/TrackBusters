@@ -1,3 +1,11 @@
+-function prettyDate(dateString){
+    -var date = new Date(dateString);
+    -var d = date.getDate();
+    -var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+    -var m = monthNames[date.getMonth()];
+    -var y = date.getFullYear();
+    -return ' '+d+' '+m+' '+y;
+-}
 div(id='mainContentWrapper')
   div(id='actionBar', class='actionBar')
     div(id='actionBarIdentifier')
@@ -30,7 +38,7 @@ div(id='mainContentWrapper')
                     div(class='card-body')
                       h5(class='card-title')=event.type
                       div(class='card-text')
-                        p(class='card-text-time') 2018/10/11
+                        p(class='card-text-time')=event.startDate event.endDate
                         p=event.location
         if !currentUser.complete
           div(class='col col-lg-10 offset-lg-1')
@@ -43,9 +51,11 @@ div(id='mainContentWrapper')
                 div(class='col col-lg-4')
                   div(class='card')
                     div(class='card-body')
-                      h5(class='card-title')=event.type
+                      h5(class='card-title')
+                        span(class="d-block")=event.name
+                        span(class="d-block red")=event.type
                       div(class='card-text')
-                        p(class='card-text-time') 2018/10/11
-                        p=event.location
+                        span(class="d-block")=prettyDate(event.startDate)+prettyDate(event.endDate)
+                        span(class="d-block")=event.location
       div(class='row')
       
