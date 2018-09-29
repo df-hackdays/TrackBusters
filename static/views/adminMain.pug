@@ -58,6 +58,7 @@
                           div(class='card-text')
                             span(class="d-block")=prettyDate(event.startDate)+prettyDate(event.endDate)
                             span(class="d-block")=event.location
+                            span(class="d-block red")=event.status
                           button(class='btn float-left') <i class="fas fa-chart-bar"></i>
                           button(class='btn float-right') <i class="fas fa-pencil-alt"></i>
           div(class='row')

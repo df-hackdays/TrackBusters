@@ -27,23 +27,29 @@ div(id='mainContentWrapper')
         div(class='col col-lg-10 offset-lg-1')
           h4 Events
       div(class='row')
-        if currentUser.complete && recommended!=null
+        if currentUser.complete
           div(class='col col-lg-10 offset-lg-1')
             .row
               span Based on your profile, you may be interested in the following events:
             div(class='row')
-              each event in recommended
-                div(class='col col-lg-4')
-                  div(class='card')
-                    div(class='card-body')
-                      h5(class='card-title')=event.type
-                      div(class='card-text')
-                        p(class='card-text-time')=event.startDate event.endDate
-                        p=event.location
+              //- change to actullay logic
+              div(class='col col-lg-4')
+                div(class='card')
+                  div(class='card-body')
+                    h5(class='card-title')
+                      span(class="d-block") Digital Skills for Beginners
+                      span(class="d-block red") Ladies Learn Coding
+                    div(class='card-text')
+                      span(class="d-block") 2018-10-11 2018-10-11
+                      span(class="d-block") Toronto
         if !currentUser.complete
           div(class='col col-lg-10 offset-lg-1')
             .row
-              span Finish this <a href="#">Survey</a> to get recommendation list tailored to suit your needs. 
+              span Complete your <a href="#">profile</a> to get recommendation list tailored to suit your needs. 
+      div(class='row')
+        div(class='col col-lg-10 offset-lg-1')
+          .row
+            span Exploe the events:
       div(class='row')
         div(class='col col-lg-10 offset-lg-1')
           div(class='row')

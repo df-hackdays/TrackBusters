@@ -10,15 +10,15 @@
 <h3>Tell us a little bit more about yourself</h3>
 <form class="form" id="signup2Form">
   <div class="form-group">
-    <label for="fullname">What's your full name?</label>
+    <label for="fullname">What's your full name? *</label>
     <input type="text" class="form-control" name="fullname" id="fullname">
   </div>
   <div class="form-group">
-    <label for="dob">What’s your date of birth?</label>
+    <label for="dob">What’s your date of birth? *</label>
     <input type="text" class="form-control" name="dateofbirth" id="dob">
   </div>
   <div class="form-group">
-    <label for="zip">What's your zipcode?</label>
+    <label for="zip">What's your zipcode? *</label>
     <input type="text" class="form-control" name="zip" id="zip">
   </div>
   <div class="form-group">
@@ -27,6 +27,18 @@
       <option value="he">He/His</option>
       <option value="she">Her/She</option>
       <option value="other">Other</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="race">Tell us a bit about your ethnicity. Select all that apply.</label>
+    <select class="form-control" multiple name="race" id="race">
+      <option value="Asian">Asian (For example: Asian Indian, Chinese, Filipino, Japanese, Korean etc.)</option>
+      <option value="Black/African">Black / African (For example: African American, Jamaican, Nigerian, etc.)</option>
+      <option value="Hispanic / Latin / Spanish Origin">Hispanic / Latin / Spanish Origin (For example: Mexican, Colombian, Puerto Rican, Dominican etc.)</option>
+      <option value="Native American">Native American</option>
+      <option value="Caucasian">Caucasian</option>
+      <option value="Other">Other</option>
+      <option value="">Prefer Not to Answer</option>
     </select>
   </div>
   <div class="form-group">

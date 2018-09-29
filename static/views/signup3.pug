@@ -7,19 +7,27 @@
   <span class="prog-line prog-line-2"></span>
   <span class="prog-ball prog-ball-3 prog-ball-active"></span>
 </div>
-<h3>Now tell us a little bit more about yourself</h3>
+<h3>Tell us how we can help you pick your path</h3>
 <form class="form" id="signup3Form">
   <div class="form-group">
-    <label for="fullname">What's your full name?</label>
-    <input type="text" class="form-control" name="fullname" id="fullname">
+    <label for="category">Which one of the following describes you the best?</label>
+    <select id="category">
+      <option value="student">I'm a student</option>
+      <option value="teacher">I'm a teacher</option>
+      <option value="working">I'm working</option>
+    </select>
   </div>
   <div class="form-group">
-    <label for="dob">What’s your date of birth?</label>
-    <input type="text" class="form-control" name="dateofbirth" id="dob">
+    <label for="fullname">Where do you go to school?</label>
+    <input type="text" class="form-control" name="school" id="school">
   </div>
   <div class="form-group">
-    <label for="zip">What's your zipcode?</label>
-    <input type="text" class="form-control" name="zip" id="zip">
+    <label for="grade">Which grade are you in?</label>
+    <input type="text" class="form-control" name="grade" id="grade">
+  </div>
+  <div class="form-group">
+    <label for="hopetostart">When are you hoping to start?</label>
+    <input type="text" class="form-control" name="hopetostart" id="hopetostart">
   </div>
   <div class="form-group">
     <button type="button" id="s3Prev" class="btn btn-primary float-left">Prev</button>

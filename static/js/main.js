@@ -24,6 +24,7 @@ var clicksignup = function(){
       tl.add(tween1).add(tween2);
       setTimeout(()=>{
         $("#frontContent").html(data);
+        $("#dob").datepicker("option", "dateFormat", "YYYY-MM-DD");
         s2next();
       ;}, 1000);
     })

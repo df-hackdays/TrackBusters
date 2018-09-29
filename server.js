@@ -15,6 +15,7 @@ mongoose.connect(uri);
 var signup = function (newUser, req, res){
   newUser.save(function(err){
     if(err) {
+      console.log(err);
       res.render("signup", {
         error: "Error"
       });
@@ -22,6 +23,7 @@ var signup = function (newUser, req, res){
       var sessData = req.session;
       var newUser = sessData.newUser;
       user.findOne({ email: newUser.email }, function (err, currentUser) {
+        console.log(err);
         sessData.currentUser = currentUser;
         var events;
         event.find({status: 'active'}, null, {skip:0, limit:10}, function(err, docs){
@@ -117,7 +119,7 @@ app.post('/signup3', (req, res)=>{
   if(to.zip!=null){
     complete = true;
   }
-  var newUser = new user({ username: to.username, password: to.password, email: to.email, fullname: to.fullname, gender: to.gender, dateofbirth: to.date, zip: to.zip, race: to.race, avatar: 'default', status: 'active' , signuptime: Date.now(), school: req.body.school, grade: req.body.grade, hopetostart: req.body.hopetostart, interest: req.body.interest, desc: req.body.desc, complete: complete});
+  var newUser = new user({ username: to.username, password: to.password, email: to.email, fullname: to.fullname, gender: to.gender, dateofbirth: to.dateofbirth, zip: to.zip, race: to.race, avatar: 'default', status: 'active' , signuptime: Date.now(), school: req.body.school, grade: req.body.grade, hopetostart: req.body.hopetostart, interest: req.body.interest, desc: req.body.desc, complete: complete});
   /* add validation*/
   signup(newUser, req, res);
 });
@@ -158,7 +160,7 @@ app.get("/toggleSignup", (req, res)=>{
 //  todo: implement admin user login, post
 app.get("/admin", (req, res)=>{
   var events;
-  event.find({status: 'active'}, null, {skip:0, limit:10}, function(err, docs){
+  event.find({}, function(err, docs){
     events = docs;
     res.render('adminMain', {
       events: docs
