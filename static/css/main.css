@@ -18,6 +18,11 @@ h2{
   font-weight: 700;
 }
 
+h4{
+  font-size: 6vh;
+  font-weight: 700;
+}
+
 p{
   font-size: 24px;
 }
@@ -50,17 +55,20 @@ a{
 
 #mainContent{
   height: 100%;
-  width: calc(100% - 150px);
+  width: calc(100% - 200px);
+  position: absolute;
+  left: 200px;
+  top: 0px;
 }
 
 #actionBar{
   height: 100vh;
-  width: 150px;
+  width: 200px;
   background-color: rgb(138, 249, 243);
   position: fixed;
   left: 0px;
   top: 0px;
-  box-shadow: 3px 3px 5px #fff;
+  box-shadow: 3px 3px 5px #777;
 }
 
 #logo{
@@ -90,15 +98,28 @@ a{
   margin-left: 150px;
 }
 
+#slogan1, #slogan2, #slogan3, #slogan4{
+  opacity: 0;
+}
+
 #signupWrapper{
   margin-left: 50px;
   width: calc(100% - 50px);
 }
 
 #signupForm{
+  opacity: 0;
   width: 400px;
   margin: auto;
   padding: 20px;
+}
+
+#actionBarIdentifier{
+  padding: 30px 0;
+}
+.avatar{
+  font-size: 48px;
+  margin-left: 5px;
 }
 
 .signup-progress{
@@ -139,4 +160,38 @@ a{
 }
 .btn-primary{
   background-color: #EF0A1A;
+}
+.btn-primary:hover{
+  background-color: #EF0A1A;
+}
+
+.top-spacer{
+  height: 5vh;
+}
+
+.user-action{
+  font-size: 20px;
+  line-height: 36px;
+  vertical-align: middle;
+  color: #22A39F;
+  margin-left: 20px;
+}
+.user-action-wrapper{
+  padding: 20px 0;
+}
+.user-action-wrapper:hover{
+  background-color: #22A39F;
+}
+.user-action-wrapper:hover .user-action{
+  color: white;
+}
+.user-action-active{
+  background-color: #22A39F;
+}
+.user-action-active .user-action{
+  color: black;
+}
+
+.i{
+  color: black;
 }

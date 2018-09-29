@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 
 const uri = "mongodb+srv://clc:clcuser2018@db-4yfv6.mongodb.net/clc?retryWrites=true";
 
+// seperate password from this table
 const userSchema = new mongoose.Schema({ username: 'string', password: 'string', email: 'string', fullname: 'string', gender: 'string', dateofbirth: 'date', zip: 'string', race: 'string', avatar: 'string', status: 'string' , signuptime: 'date', school: 'string', grade: 'string', hopetostart: 'string', interest: 'string', desc: 'string', complete: 'boolean'});
 const user = mongoose.model('user', userSchema);
-const eventSchema = new mongoose.Schema({name: 'string', contents: [{title: 'string', content: 'string'}], startDate: 'date', endDate: 'date', location: 'string', status: 'string', registered: [{id:'string'}], participated: [{id:'string'}]});
+const eventSchema = new mongoose.Schema({name: 'string', contents: [{title: 'string', content: 'string'}], type: 'string', startDate: 'date', endDate: 'date', location: 'string', status: 'string', registered: [{id:'string'}], participated: [{id:'string'}]});
 const event = mongoose.model('event', eventSchema);
 
 mongoose.connect(uri);
@@ -20,9 +21,11 @@ var signup = function (newUser, req, res){
     }else{
       var sessData = req.session;
       var newUser = sessData.newUser;
+      var recommended = recommendEvent(currentUser);
       user.findOne({ email: newUser.email }, function (err, currentUser) {
         res.render('main', {
           currentUser: currentUser,
+          recommended: recommended,
           events: event.find({status: 'active'}).skip(0).limit(10).sort({startDate: -1})
         });
       });
@@ -92,7 +95,6 @@ app.post("/signup2", (req, res)=>{
   newUser.fullname = req.body.fullname;
   newUser.dateofbirth = req.body.dateofbirth;
   newUser.zip = req.body.zip;
-  newUser.email = req.body.email;
   newUser.gender = req.body.gender;
   newUser.race = req.body.race;
   sessData.newUser = newUser;
@@ -118,6 +120,21 @@ app.post('/signup3', (req, res)=>{
   signup(newUser, req, res);
 });
 
+app.get('/dashboard', (req, res)=>{
+  var id = req.params.id;
+  user.findById(id, (err, currentUser)=>{
+    var recommended;
+    if(currentUser.complete===true){
+      recommended = recommendEvent(currentUser);
+    }
+    res.render('main', {
+      currentUser: currentUser,
+      recommended: recommended,
+      events: event.find({status: 'active'}).skip(0).limit(10).sort({startDate: -1})
+    });
+  });
+});
+
 app.post("/login", (req, res)=>{
   var username = req.body.username;
   var password = req.body.password
@@ -131,3 +148,7 @@ app.listen(port, (error)=>{
     console.log("Running on port "+port);
   }
 });
+
+var recommendEvent = function(cu){
+  return null;
+}

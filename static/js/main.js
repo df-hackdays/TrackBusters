@@ -1,4 +1,12 @@
 $(document).ready(function(){
+  var s1 = TweenMax.to($("#slogan1"), 2, {opacity: "1"});
+  var s2 = TweenMax.to($("#slogan2"), 2, {opacity: "1"});
+  var s3 = TweenMax.to($("#slogan3"), 1, {opacity: "1"});
+  var s4 = TweenMax.to($("#slogan4"), 1, {opacity: "1"});
+  var f1 = TweenMax.to($("#signupForm"), 0.5, {opacity: "1"});
+  var tl1 = new TimelineLite();
+  tl1.add(s1).add(s2).add(s3).add(s4).add(f1);
+
   $("#signup").click(function(e){
     e.preventDefault();
     $.post("/signup", $("#signupForm").serialize(), function(data){
@@ -35,7 +43,7 @@ var s3next = function(){
   $("#s3Next").click(function(e){
     e.preventDefault();
     $.post("/signup3", $("#signup3Form").serialize(), function(data){
-      TweenMax.to($('#frontContent'), 1, {opacity: "0", right: "600px"});
+      TweenMax.to($('#frontContent'), 1, {opacity: "0"});
       setTimeout(()=>{
         $("body").html(data);
         TweenMax.from($('#mainContent'), 1, {right: "600px"});
