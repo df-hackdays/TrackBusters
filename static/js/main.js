@@ -49,7 +49,12 @@ var clickLogin = function(){
       var tl = new TimelineLite();
       tl.add(tween1).add(tween2);
       setTimeout(()=>{
-        location.replace(data);
+        if($(data).find("Invalid ").length>0){
+          $("#signupWrapper").html(data);
+        }else{
+          $("body").html(data);
+          attachGoToEvent();
+        }
       ;}, 1000);
     })
   });
@@ -102,5 +107,11 @@ var toggleSignup = function(){
       $("#signupWrapper").html(data);
       clicksignup();
     ;}, 1000);
+  });
+};
+
+var attachGoToEvent = function(){
+  $(".card").click(function(){
+      location.replace("https://www.canadalearningcode.ca/experiences/toronto-chapter-ladies-learning-code-javascript-for-beginners-an-introduction-to-the-fundamentals-of-web-programming/");
   });
 };

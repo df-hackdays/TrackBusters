@@ -76,30 +76,29 @@ app.get("/", (req, res)=>{
 })
 
 app.post("/signup", (req, res)=>{
-  var password;
-  bcrypt.hash(req.body.password, 10, function(err, hash) {
+  var password = req.body.password;
+  bcrypt.hash(password, 10, function(err, hash) {
     if(err){
       console.log(err);
     }else{
-      password = hash;
+      var email = req.body.email;
+      var repw = req.body.repw;
+      var signupDate = Date.now();
+      var newUser = new user();
+      newUser.email = email;
+      newUser.password = hash;
+      var sessData = req.session;
+      sessData.newUser = newUser;
+      /* replace with validation*/
+      if(true){
+        res.render('signup2');
+      }else{
+        res.render('signup', {
+          error: error
+        });
+      }
     }
   });
-  var email = req.body.email;
-  var repw = req.body.repw;
-  var signupDate = Date.now();
-  var newUser = new user();
-  newUser.email = email;
-  newUser.password = password;
-  var sessData = req.session;
-  sessData.newUser = newUser;
-  /* replace with validation*/
-  if(true){
-    res.render('signup2');
-  }else{
-    res.render('signup', {
-      error: error
-    });
-  }
 });
 
 app.post("/signup2", (req, res)=>{
@@ -125,7 +124,7 @@ app.post('/signup3', (req, res)=>{
   var sessData = req.session;
   var to = sessData.newUser;
   var complete = false;
-  if(to.zip!=null){
+  if(to.zip!=null&&to.zip.trim()!=''){
     complete = true;
   }
   var newUser = new user({ username: to.username, password: to.password, email: to.email, fullname: to.fullname, gender: to.gender, dateofbirth: to.dateofbirth, zip: to.zip, race: to.race, avatar: 'default', status: 'active' , signuptime: Date.now(), school: req.body.school, grade: req.body.grade, hopetostart: req.body.hopetostart, interest: req.body.interest, desc: req.body.desc, complete: complete});
@@ -151,8 +150,10 @@ app.post("/login", (req, res)=>{
   var password = req.body.password;
   var sessData = req.session;
   user.findOne({email: email}, (err, currentUser)=>{
-    bcrypt.compare(password, currentUser.password, function(err, res) {
-      if(res) {
+    bcrypt.compare(password, currentUser.password, function(err, result) {
+      if(err) {
+        res.render('login', {error: "Invalid Credentials."});
+      } else {
         sessData.currentUser = currentUser;
         event.find({status: 'active'}, null, {skip:0, limit:10}, function(err, docs){
           res.render('main', {
@@ -160,8 +161,6 @@ app.post("/login", (req, res)=>{
             events: docs
           });
         });
-      } else {
-        render('login', {error: "Invalid Credentials."});
       }
     });
   });

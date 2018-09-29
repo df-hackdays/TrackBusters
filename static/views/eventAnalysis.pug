@@ -25,10 +25,10 @@
     -return ' '+d+' '+m+' '+y;
 -}
 div(id='mainContentWrapper')
-  <div id="logoRight"><img src="/img/clc-logo-1.svg"></div>
+  <div id="logoRight"><img src="/img/clc-logo-1.svg" alt="canada learning code logo"></div>
   div(id='actionBar', class='actionBar')
     div(id='actionBarIdentifier')
-      span(id='username' style="margin-left: 20px;") Admin User
+      span(id='username' style="margin-left: 20px;") Test Admin User
     div(class='user-action-wrapper')
       span(class='user-action' id='profileAction') <i class="fas fa-user"></i> USERS
     div(class='user-action-wrapper user-action-active')
@@ -75,7 +75,7 @@ div(id='mainContentWrapper')
         div(class='col col-lg-10 offset-lg-1')
           div(class='section-label' data-toggle="collapse" data-target="#attendance" aria-expanded="true" aria-controls="attendance")
             span(class='section-label-text') Attendance
-      div(class='row section' id="attendance" class="collapse")
+      div(class='row section' id="attendance" class="collapse show")
         div(class='col col-lg-10 offset-lg-1')
           div(class='row inner-section')
             if event.status == 'active'
@@ -94,7 +94,7 @@ div(id='mainContentWrapper')
         div(class='col col-lg-10 offset-lg-1')
           div(class='section-label' data-toggle="collapse" data-target="#demographic" aria-expanded="true" aria-controls="demographic")
             span(class='section-label-text') Demographic
-      div(class='row section' id="demographic" class="collapse") 
+      div(class='row section' id="demographic" class="collapse show") 
         div(class='col col-lg-10 offset-lg-1')
           div(class='row inner-section')
             div(class='col col-lg-6')
